@@ -1,0 +1,12 @@
+br\edu\famapr\escleve\controllers\FuncionarioController.class
+br\edu\famapr\escleve\repository\InstituicaoRepository.class
+br\edu\famapr\escleve\models\enums\UF.class
+br\edu\famapr\escleve\controllers\InstiruicaoController.class
+br\edu\famapr\escleve\models\enums\Cargo.class
+br\edu\famapr\escleve\repository\FuncionarioRepository.class
+br\edu\famapr\escleve\models\Instituicao.class
+br\edu\famapr\escleve\controllers\EnderecoController.class
+br\edu\famapr\escleve\models\Endereco.class
+br\edu\famapr\escleve\repository\EnderecoRepository.class
+br\edu\famapr\escleve\models\Funcionario.class
+br\edu\famapr\escleve\EscleveApplication.class
