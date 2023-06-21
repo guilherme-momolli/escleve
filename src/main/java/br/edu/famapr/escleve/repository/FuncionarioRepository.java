@@ -13,4 +13,5 @@ public interface FuncionarioRepository  extends JpaRepository<Funcionario, Long>
     Funcionario save(Funcionario funcionario);
     Optional<Funcionario> findById(Long id);
 
+    Funcionario findByEmail(String email);
 }

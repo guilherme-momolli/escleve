@@ -17,19 +17,18 @@ CREATE TABLE endereco (
 
 /* Tabela Instituicao
 CREATE TABLE instituicao (
-	id int4 NOT NULL,
-	nome varchar(100) NULL,
-	nucleo varchar(100) NULL,
+	id SERIAL PRIMARY,
+	nome varchar(100),
+	nucleo varchar(100),
 	endereco_id int4 NULL,
-	CONSTRAINT pk_id_instituicao PRIMARY KEY (id),
 	CONSTRAINT instituicao_endereco_id_fkey FOREIGN KEY (endereco_id) REFERENCES endereco(id)
-);
+);*/
 
 -- Tabela Funcionarios
-CREATE TABLE funcionarios (
- id integer CONSTRAINT pk_id_funcionario PRIMARY KEY,
+CREATE TABLE funcionario (
+ id SERIAL primary KEY,
   nome VARCHAR(100),
   cpf VARCHAR(14),
-  cargo CargoEnum,
-  instituicao_id INT REFERENCES Instituicao(id)
-);*/
+  cargo VARCHAR(100)
+ -- instituicao_id INT REFERENCES Instituicao(id)
+);

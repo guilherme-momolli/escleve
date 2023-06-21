@@ -1,8 +1,7 @@
 package br.edu.famapr.escleve.controllers;
 
-import br.edu.famapr.escleve.models.Endereco;
+import br.edu.famapr.escleve.dto.LoginRequestDTO;
 import br.edu.famapr.escleve.models.Funcionario;
-import br.edu.famapr.escleve.repository.EnderecoRepository;
 import br.edu.famapr.escleve.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +16,7 @@ public class FuncionarioController {
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+
 
     @GetMapping("/hello")
     public String helloWorld() {return "Olá, mundo!";}
@@ -41,4 +41,29 @@ public class FuncionarioController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequestDTO request) {
+        String login = request.getLogin();
+        String senha = request.getSenha();
+
+        boolean autenticado = autenticar(login, senha);
+
+        if (autenticado) {
+            return ResponseEntity.ok("Login bem-sucedido!");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+        }
+    }
+
+    public boolean autenticar(String email, String senha) {
+        Funcionario funcionario = funcionarioRepository.findByEmail(email);
+        if (funcionario != null) {
+
+            return senha.equals(funcionario.getSenha());
+
+        }
+        return false;
+    }
+
 }

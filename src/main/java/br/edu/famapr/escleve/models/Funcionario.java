@@ -22,5 +22,9 @@ public class Funcionario {
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
 
+    @Column(unique = true)
+    private String email;
+
+    private String senha;
 
 }

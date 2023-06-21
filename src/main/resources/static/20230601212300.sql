@@ -21,7 +21,6 @@ CREATE TABLE instituicao (
 	nome varchar(100),
 	nucleo varchar(100),
 	endereco_id int4 NULL,
-	CONSTRAINT pk_id_instituicao PRIMARY KEY (id),
 	CONSTRAINT instituicao_endereco_id_fkey FOREIGN KEY (endereco_id) REFERENCES endereco(id)
 );*/
 
