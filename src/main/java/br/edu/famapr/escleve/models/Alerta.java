@@ -2,8 +2,12 @@ package br.edu.famapr.escleve.models;
 
 import br.edu.famapr.escleve.models.enums.Emergencia;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import lombok.Data;
 
+import java.time.LocalDateTime;
+@Data
+@Entity
+@Table(name = "alerta")
 public class Alerta {
 
     @Id
@@ -13,6 +17,7 @@ public class Alerta {
     @Enumerated(EnumType.STRING)
     private Emergencia emergencia;
 
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime data_ocorrencia;
 
     @ManyToOne

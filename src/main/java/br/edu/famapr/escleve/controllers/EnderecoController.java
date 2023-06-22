@@ -26,7 +26,7 @@ public class EnderecoController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<Endereco> addEndereco(@RequestBody Endereco endereco) {
         try{
             endereco = enderecoRepository.save(endereco);

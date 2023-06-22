@@ -17,7 +17,7 @@ public class Instituicao {
 
     private String nucleo;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 

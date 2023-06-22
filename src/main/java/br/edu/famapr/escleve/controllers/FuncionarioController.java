@@ -6,6 +6,7 @@ import br.edu.famapr.escleve.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class FuncionarioController {
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
-
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/hello")
     public String helloWorld() {return "Olá, mundo!";}
@@ -31,9 +32,11 @@ public class FuncionarioController {
         }
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<Funcionario> addFuncionario(@RequestBody Funcionario funcionario) {
         try{
+
+            funcionario.setSenha(passwordEncoder.encode(funcionario.getSenha()));
             funcionario = funcionarioRepository.save(funcionario);
             return new ResponseEntity<>(funcionario, HttpStatus.CREATED);
         }catch(Exception e){
@@ -60,7 +63,9 @@ public class FuncionarioController {
         Funcionario funcionario = funcionarioRepository.findByEmail(email);
         if (funcionario != null) {
 
-            return senha.equals(funcionario.getSenha());
+        //    String senhaEncp = passwordEncoder.encode(senha);
+           return passwordEncoder.matches(senha, funcionario.getSenha());
+          //  return senhaEncp.equals(funcionario.getSenha());
 
         }
         return false;
