@@ -1,36 +1,38 @@
 package br.edu.famapr.escleve.controllers;
 
-import br.edu.famapr.escleve.models.Endereco;
-import br.edu.famapr.escleve.repository.EnderecoRepository;
+import br.edu.famapr.escleve.models.Alerta;
+import br.edu.famapr.escleve.repository.AlertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
 @RestController
-@RequestMapping("/endereco")
-public class EnderecoController {
+@RequestMapping("/alerta")
+public class AlertaController {
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private AlertaRepository alertaRepository;
 
-    @GetMapping("/hello")
-    public String helloWorld() {return "Olá, mundo!";}
     @GetMapping("/list")
-    public ResponseEntity<List<Object>> getAllEnderecos(){
+    public ResponseEntity<List<Object>> getAllAlertas(){
         try {
-            return new ResponseEntity(enderecoRepository.findAll(), HttpStatus.OK);
+            return new ResponseEntity(alertaRepository.findAll(), HttpStatus.OK);
         }catch (Exception exception){
             System.out.println(exception.getMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
     @PostMapping("/add")
-    public ResponseEntity<Endereco> addEndereco(@RequestBody Endereco endereco) {
+    public ResponseEntity<Alerta> addAlerta(@RequestBody Alerta alerta) {
         try{
-            endereco = enderecoRepository.save(endereco);
-            return new ResponseEntity<>(endereco, HttpStatus.CREATED);
+            alerta.setData_ocorrencia(LocalDateTime.now());
+            alerta = alertaRepository.save(alerta);
+            return new ResponseEntity<>(alerta, HttpStatus.CREATED);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

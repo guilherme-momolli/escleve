@@ -22,5 +22,12 @@ public class Funcionario {
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
 
+    @Column(unique = true)
+    private String email;
 
+    private String senha;
+
+    @ManyToOne
+    @JoinColumn(name = "instituicao_id")
+    private Instituicao instituicao;
 }
