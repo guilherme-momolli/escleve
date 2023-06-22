@@ -27,4 +27,7 @@ public class Funcionario {
 
     private String senha;
 
+    @ManyToOne
+    @JoinColumn(name = "instituicao_id")
+    private Instituicao instituicao;
 }
