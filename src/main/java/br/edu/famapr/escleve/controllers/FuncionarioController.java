@@ -62,11 +62,7 @@ public class FuncionarioController {
     public boolean autenticar(String email, String senha) {
         Funcionario funcionario = funcionarioRepository.findByEmail(email);
         if (funcionario != null) {
-
-        //    String senhaEncp = passwordEncoder.encode(senha);
-           return passwordEncoder.matches(senha, funcionario.getSenha());
-          //  return senhaEncp.equals(funcionario.getSenha());
-
+            return passwordEncoder.matches(senha, funcionario.getSenha());
         }
         return false;
     }
